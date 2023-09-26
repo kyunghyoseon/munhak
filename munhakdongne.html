@@ -1,0 +1,878 @@
+﻿<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<title>munhakdongne</title>
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/munhakdongne.css">
+<link rel="stylesheet" href="css/swiper.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/2597131e32.js" crossorigin="anonymous"></script>
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/jquery-1.8.1.min.js"></script>
+<script src="js/swiper.min.js"></script>
+<script src="js/jquery.bxslider.min.js"></script>
+<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/prefixfree.min.js"></script>
+<script src="js/munhakdongne.js"></script>   
+<script src="js/animated.js"></script>   
+<script src="js/swiper_slide.js"></script>   
+<script src="js/waypoints.min.js"></script>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+    console.log("로딩완료");
+
+    //1.대상선정
+    //(1) 타겟박스 : .tpg
+    const tpg = document.querySelector(".tpg");
+
+    //(2) 가로이동박스 : .slidePg
+    const spg = document.querySelector(".slidePg");
+
+    // 리스트 넣기 함수 호출 부분
+    makeList();
+
+    //(3) 가로이동박스 : .slidePg ul
+    const mvbx = spg.querySelector("ul");
+
+    //console.log(tpg,spg,mvbx);
+
+    /*****************************
+    스크롤실 스티키 구간에서
+    가로방향 이동 구현하기
+    
+    ******************************/
+    //대상 : mvbx
+    //이벤트: scroll
+
+    //스크롤 이벤트 설정부분
+    window.addEventListener("scroll",movePage);
+
+    /*****************************
+    함수명: retVal
+    기능: getBoundingClientRect()값 리턴
+    *****************************/
+    const retVal = x => x.getBoundingClientRect().top;
+
+    /***********************
+    함수명: movePage
+    기능: 가로방향 이동하기
+    ************************/
+    function movePage(){
+
+        //스크롤 위치값 확인
+        //console,log(window.scrollY);
+
+        // 1. 타겟 박스의 바운딩위치값 찍기
+        // 타켓박스 = 스트키박스의 부모박스(멈추는 구간임)
+        let tgpos = retVal(tpg);
+        console.log("바운딩값:",tgpos);
+
+        // 2. 가로이동박스( mvbx )의 leftl값 변경하기
+        // 타겟박스의 바운딩값을 left값으로 넣어준다
+        // 이유는 바운딩수치 === left값 수치와 동일 === 3000px 이라서
+        // -> 최대이동값이 마이너스로 한계값이 일치함
+        // 대상: mvbx
+        // 적용구간설정: 0 이하 -3000px 이상
+        if(tgpos <= 0 && tgpos >= -2200)
+            mvbx.style.left = tgpos + "px";
+        else if(tgpos > 0)
+        mvbx.style.left = "0";
+
+
+    }////////////// movePege 함수///////////
+
+    /*
+    함수명: makeList
+    기능: 리스트 넣기
+    */
+    function makeList(){
+        //html 코드변수
+    let hcode = "<ul>";
+
+    //2. 가로이동박스에 디자인 요소 넣는 부분
+    for(let x = 1; x < 8; x++){
+        hcode += `
+        <li>
+            <img src="img/img8/${x}.png" alt="img">
+        </li>	
+        `;
+    }  //for
+    hcode += "</ul>";
+
+    //가로이동박스에 코드넣기
+    spg.lnnerHTML = hcode;
+
+    }   //makeList 함수
+});    //load
+</script>
+</head>
+   
+<body>
+<div id="skip_menu" class="skip">   <!--웹 접근성 측면에서 스킵 넣어주기-->
+    <a href="#pcmenu">메뉴 바로가기</a>
+</div>
+<header id="pcmenu">  <!--pc 메뉴바-->
+    <nav id="mmenu">    
+        <h1><a href="#">문학동네<span class="munhak">Munhak dongne Pubilshing Group</span></a></h1>
+        <ul class="navi">
+            <li class="color"><a href="#">도서</a>
+                <ul class="sub1">
+                    <li><a href="#">새로나온 책</a></li>
+                    <li><a href="#">브랜드별 도서</a></li>
+                    <li><a href="#">분야별 도서</a></li>
+                    <li><a href="#">수상도서</a></li>
+                    <li><a href="#">매거진</a></li>
+                    <li><a href="#">정기구독</a></li>
+                </ul>
+            </li>
+            
+            <li class="color"><a href="#">브랜드</a>
+                <ul class="sub1">
+                    <li><a href="#">문학동네 출판그룹</a></li>
+                    <li><a href="#">연혁</a></li>
+                    <li><a href="#">브랜드</a></li>
+                    <li><a href="#">찾아오시는 길</a></li>
+                    <li><a href="#">제휴문의</a></li>
+                    <li><a href="#">채용안내</a></li>
+                </ul>
+            </li>
+            
+            <li class="color"><a href="#">북클럽</a>
+                <ul class="sub1">
+                <li><a href="#">북클럽 문학동네란?</a></li>
+                <li><a href="#">맴버십 가입</a></li>
+                <li><a href="#">맴버십 선물하기</a></li>
+                <li><a href="#">뉴스레터</a></li>
+                <li><a href="#">SHOP</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">공지사항</a></li>
+                </ul>
+            </li>
+            
+            <li class="color"><a href="#">고객지원</a>
+                <ul class="sub1">
+                <li><a href="#">공지사항</a></li>
+                <li><a href="#">독자, 책을 말하다</a></li>
+                <li><a href="#">공모전과 투고</a></li>
+                <li><a href="#">2차 저작권 이용안내</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">자료실</a></li>
+                <li><a href="#">동네서점</a></li>
+                <li><a href="#">학교/도서관</a></li>
+                </ul>
+            </li>
+
+            <li class="color"><a href="#">저자</a></li>
+            <li class="color"><a href="#">웹진</a></li>
+
+            <div class="form">
+                <form class="form_search" action="" method="get">
+                    <input type="text" id="search_input" class="form_search_input" placeholder=" search">
+                    <span id="search_trigger" class="form_search_submit"><img src="img/swatch.png" alt="검색" ></span>
+                </form>
+            </div>
+            <div class="login">
+                <a href="#"><img src="img/login.png" alt="로그인"></a>
+            </div>
+        </ul>
+    </nav>
+</header>
+
+
+<section class="swiper mySwiper"> <!-- 상단 슬라이드 부분 -->
+    <div class="swiper-wrapper">
+        <div class="swiper-slide swiper-slide1">
+            <div class="text1 wp1">
+                <h1>
+                    "이런 일까지 할 줄은 몰랐지..."<br>
+                    오늘도 평화로운 대혼돈의 도서관에서<br>
+                    사서는 고군분투중
+                </h1>
+                <h2>
+                    무엇이든 가능한, 이상하고 아름다운 도서관에서<br>
+                    오늘도 우리는 여러분을 기다립니다.
+                </h2>
+            </div>
+            <div class="book_img">
+                <img class="book1" src="img/book_1.png" alt="사서 일기">
+                <img class="circle" src="img/circle.png" alt="배경 원형 png">
+            </div>
+        </div>
+
+        <div class="swiper-slide swiper-slide2">
+            <div class="text1">
+                <h1>
+                    설탕 한 스푼에 사랑 두 큰술<br>
+                    소금 한 꼬집에 눈물 두 방울!
+                </h1>
+                <h2>
+                    "마음"이란 양념으로 버무린,<br>
+                    평범하고도 특별한 음식 이야기
+                </h2>
+            </div>
+            <div class="book_img">
+                <img class="book1" src="img/book_2.png" alt="사서 일기">
+                <img class="circle" src="img/circle.png" alt="배경 원형 png">
+            </div>
+        </div>
+
+        <div class="swiper-slide swiper-slide3">
+            <div class="text1">
+                <h1>
+                    더 진실하기를, 더 치열하기를<br>
+                    더 용기 있기를...
+                </h1>
+                <h2>
+                    어디로 가는지 모르지만, 적어도 사라지지 않고 계속<br>
+                    나아갈 수 있다는 걸 알려주는 빛,<br>
+                    그런 빛을 좆고 싶었는지 모른다.
+                </h2>
+            </div>
+            <div class="book_img">
+                <img class="book1" src="img/book_3.png" alt="사서 일기">
+                <img class="circle" src="img/circle.png" alt="배경 원형 png">
+            </div>
+        </div>
+
+        <div class="swiper-slide swiper-slide4">
+            <div class="text1">
+                <h1>
+                    "나는 내가 오로지 내꿈들을<br>
+                    적기 위해서만 꿈을 꾸어왔다는<br>
+                    사실을 깨달았다."
+                </h1>
+                <h2>
+                    20세기 현대문학의 가장 도발적이고 전위적인 작가<br>
+                    조르주 페렉의 자기 탐구적 문학 실험
+                </h2>
+            </div>
+            <div class="book_img">
+                <img class="book4" src="img/book_4.png" alt="사서 일기">
+                <img class="circle" src="img/circle.png" alt="배경 원형 png">
+            </div>
+        </div>
+
+        <div class="swiper-slide swiper-slide5">
+            <div class="text1">
+                <h1>
+                    "풍요가 만들어낸 새로운 인간"<br>
+                    인간은 스스로 자신의 환경을<br>
+                    창조하며 진화한다.
+                </h1>
+                <h2>
+                    살아남는 것은 가장 힘 센 종도,<br>
+                    가장 영리한 종도 아니요. 변화에 가장 잘 대처하는 종.
+                </h2>
+            </div>
+            <div class="book_img">
+                <img class="book1" src="img/book_5.png" alt="사서 일기">
+                <img class="circle" src="img/circle.png" alt="배경 원형 png">
+            </div>
+        </div>
+    </div> <!--swiper-wrapper end-->
+
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+</section> <!--swiper mySwiper end-->
+
+<section> <!-- banner 부분 -->
+    <div class="banner_wrapper">
+        <ul class="banner_1 wp2">
+            <a href="#">
+                <li><img src="img/book_banner1.png" alt="시차노트"></li>
+                <ul class="t_box">
+                    <li class="b_text">週刊 문학동네</li>
+                    <li class="b_text1">새로운 문학 매거진 김선오 " 시차노트 "</li>
+                    <li class="btn"><a href="#">더보기 +</a></li>
+                </ul>
+            </a>
+        </ul>
+        <ul class="banner_1 wp3 delay-05s">
+            <a href="#">
+                <li><img src="img/book_banner2.png" alt="학교/도서관"></li>
+                <ul class="t_box">
+                    <li class="b_text">학교/도서관</li>
+                    <li>원화 신청, 작가 강연신청, 수업자료 스토리지</li>
+                    <li class="btn"><a href="#">더보기 +</a></li>
+                </ul>
+            </a>
+        </ul>
+        <ul class="banner_1 wp4 delay-1s">
+            <a href="#">
+                <li><img src="img/book_banner3.png" alt="완독챌린지 독파"></li>
+                <ul class="t_box">
+                    <li class="b_text">완독챌린지 독파</li>
+                    <li>읽고, 기록하고, 공유하는 슬기로운 독서생활</li>
+                    <li class="btn"><a href="#">더보기 +</a></li>
+                </ul>
+            </a>
+        </ul>
+    </div> <!--banner_wrapper end-->
+</section>
+
+<!-- 가로스크롤 박스 -->
+<!--타켓 페이지(스크롤 가로이동)-->
+<div class="pg tpg" id="project">
+   <!--옆으로 흘러갈 박스-->
+   <div class="slidePg">
+        <h1 class="wp5"><span>NEW BOOK</span> &nbsp;새로 발간된 도서를 소개합니다.</h1>  <!--&nbsp; 글자사이 공백넣기-->
+      <ul class="slide_item">
+         <li class="k-container">
+                <img src="img/new_book1.png" alt="aniimg">
+                <div class="overlay"></div>
+                <div class="t_book_box">
+                    <a href="#">
+                        <h1>베를린 함락 1945</h1>
+                        <ul>
+                            <li>저자</li>
+                            <li>역자</li>
+                            <li>출판사</li>
+                            <li>분야</li>
+                        </ul>
+                        <ul class="k_class">
+                            <li>:</li>
+                            <li>:</li>
+                            <li>:</li>
+                            <li>:</li>
+                        </ul>
+                        <ul>
+                            <li>앤터니 비버</li>
+                            <li>이두영</li>
+                            <li>글항아리</li>
+                            <li>역사</li>
+                        </ul>
+                        <p>#제2차대전세계대전 #전쟁 #베를린 #베를린전투</p>
+                    </a>
+                </div>
+         </li>         
+         <li class="k-container">
+                <img src="img/new_book2.png" alt="aniimg">
+                <div class="overlay"></div>
+                <div class="t_book_box">
+                    <a href="#">
+                        <h1>계시록</h1>
+                        <ul>
+                            <li>저자1</li>
+                            <li>저자2</li>
+                            <li>출판사</li>
+                            <li>분야</li>
+                        </ul>
+                        <ul class="k_class">
+                            <li>:</li>
+                            <li>:</li>
+                            <li>:</li>
+                            <li>:</li>
+                        </ul>
+                        <ul>
+                            <li>연상호</li>
+                            <li>최규석</li>
+                            <li>문학동네</li>
+                            <li>만화</li>
+                        </ul>
+                        <p>#미스터리#스릴러 #서스펜스 # 웹툰</p>
+                    </a>
+                </div>
+         </li>         
+         <li class="k-container">
+                <img src="img/new_book3.png" alt="aniimg">
+                <div class="overlay"></div>
+                <div class="t_book_box">
+                    <a href="#">
+                        <h1>10세기의 세책사</h1>
+                        <ul>
+                            <li>저자</li>
+                            <li>출판사</li>
+                            <li>분야</li>
+                        </ul>
+                        <ul class="k_class">
+                            <li>:</li>
+                            <li>:</li>
+                            <li>:</li>
+                        </ul>
+                        <ul>
+                            <li>미인희</li>
+                            <li>글항아리</li>
+                            <li>역사</li>
+                        </ul>
+                        <p>#18세기 #세책 #세책점 #소설 #독서</p>
+                    </a>
+                </div>
+         </li>         
+         <li class="k-container">
+                <img src="img/new_book4.png" alt="aniimg">
+                <div class="overlay"></div>
+                <div class="t_book_box">
+                    <a href="#">
+                        <h1>매혹하는 미술관</h1>
+                        <ul>
+                            <li>저자</li>
+                            <li>출판사</li>
+                            <li>분야</li>
+                        </ul>
+                        <ul class="k_class">
+                            <li>:</li>
+                            <li>:</li>
+                            <li>:</li>
+                        </ul>
+                        <ul>
+                            <li>송정희</li>
+                            <li>아트북스</li>
+                            <li>예술일반</li>
+                        </ul>
+                        <p>#예술가의삶 #여성미술가 #조지아오키프</p>
+                    </a>
+                </div>
+         </li>         
+         <li class="k-container">
+                <img src="img/new_book5.png" alt="aniimg">
+                <div class="overlay"></div>
+                <div class="t_book_box">
+                    <a href="#">
+                        <h1>반은 미치고 반은 행복했으면</h1>
+                        <ul>
+                            <li>저자</li>
+                            <li>출판사</li>
+                            <li>분야</li>
+                        </ul>
+                        <ul class="k_class">
+                            <li>:</li>
+                            <li>:</li>
+                            <li>:</li>
+                        </ul>
+                        <ul>
+                            <li>강혜정</li>
+                            <li>달</li>
+                            <li>신문집/비소설</li>
+                        </ul>
+                        <p>#반은 #미치고 #반은 #행복했으면</p>
+                    </a>
+                </div>
+         </li>         
+         <li class="k-container">
+                <img src="img/new_book6.png" alt="aniimg">
+                <div class="overlay"></div>
+                <div class="t_book_box">
+                    <a href="#">
+                        <h1>나 같은 기계들<br>Machines Like Me</h1>
+                        <ul>
+                            <li>저자</li>
+                            <li>역자</li>
+                            <li>출판사</li>
+                            <li>분야</li>
+                        </ul>
+                        <ul class="k_class">
+                            <li>:</li>
+                            <li>:</li>
+                            <li>:</li>
+                            <li>:</li>
+                        </ul>
+                        <ul>
+                            <li>이언 매큐언</li>
+                            <li>민승남</li>
+                            <li>문학동네</li>
+                            <li>장편소설</li>
+                        </ul>
+                        <p>#영문학의거장 #철학정sf #인조인간 #인공지능</p>
+                    </a>
+                </div>
+         </li>         
+         <li class="k-container">
+                <img src="img/new_book7.png" alt="aniimg">
+                <div class="overlay"></div>
+                <div class="t_book_box">
+                    <a href="#">
+                        <h1>그동안 나는 수고했습니다.</h1>
+                        <ul>
+                            <li>저자</li>
+                            <li>출판사</li>
+                            <li>분야</li>
+                        </ul>
+                        <ul class="k_class">
+                            <li>:</li>
+                            <li>:</li>
+                            <li>:</li>
+                        </ul>
+                        <ul>
+                            <li>전혜성</li>
+                            <li>싱극</li>
+                            <li>산문집/비소설</li>
+                        </ul>
+                        <p>#에세이 #은퇴 #직장인</p>
+                    </a>
+                </div>
+         </li>         
+         <li class="k-container">
+                <img src="img/new_book8.png" alt="aniimg">
+                <div class="overlay"></div>
+                <div class="t_book_box">
+                    <a href="#">
+                        <h1>기후변화<br>(고유서가 첫단추 시리즈 050)</h1>
+                        <ul>
+                            <li>저자</li>
+                            <li>역자</li>
+                            <li>출판사</li>
+                            <li>분야</li>
+                        </ul>
+                        <ul class="k_class">
+                            <li>:</li>
+                            <li>:</li>
+                            <li>:</li>
+                            <li>:</li>
+                        </ul>
+                        <ul>
+                            <li>마크 매슬린</li>
+                            <li>신봉아</li>
+                            <li>고유서가</li>
+                            <li>정치/사회</li>
+                        </ul>
+                        <p>#고유서가첫단추시리즈 #인문 #기후변화</p>
+                    </a>
+                </div>
+         </li>                  
+      </ul>
+   </div>
+</div>
+
+<!-- 맞춤별 도서추천 -->
+<section>
+    <div id="ppr">
+        <h1 class="wp6"><span>맞춤별</span> &nbsp;도서추천</h1>
+         <ul class="pbtn">
+             <li class="tap1"><a href="#ppr1" class="selected">브랜드별</a></li>
+             <li class="tap2"><a href="#ppr2">분야별</a></li>
+             <li class="tap3"><a href="#ppr3">수상도서</a></li>
+         </ul>
+         <ul  class="ppanel">
+             <li id="ppr1">
+                 <ul class="one animated fadeInLeft">
+                    <li class="box-hover wp12 delay-05s">
+                    <a href="#">
+                        <img src="img/book_6.png" alt="제품1">
+                            <div class="t_book_box1">
+                                <ul>
+                                    <li>제목</li>
+                                    <li>저자</li>
+                                    <li>분야</li>
+                                    <li>출판사</li>
+                                </ul>
+                                <ul class="k_class">
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                </ul>
+                                <ul>
+                                    <li>창조적 유전자</li>
+                                    <li>에드윈 게일</li>
+                                    <li>기초과학</li>
+                                    <li>문학동네</li>
+                                </ul>
+                                <a href="#" class="btn1">더보기 +</a>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box-hover wp13 delay-1s">
+                    <a href="#">
+                        <img src="img/book_7.png" alt="제품1">
+                            <div class="t_book_box1">
+                                <ul>
+                                    <li>제목</li>
+                                    <li>저자</li>
+                                    <li>분야</li>
+                                    <li>출판사</li>
+                                </ul>
+                                <ul class="k_class">
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                </ul>
+                                <ul>
+                                    <li>계시록</li>
+                                    <li>연상호</li>
+                                    <li>만화</li>
+                                    <li>문학동네</li>
+                                </ul>
+                                <a href="#" class="btn1">더보기 +</a>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box-hover wp14 delay-15s">
+                    <a href="#">
+                        <img src="img/book_8.png" alt="제품1">
+                            <div class="t_book_box1">
+                                <ul>
+                                    <li>제목</li>
+                                    <li>저자</li>
+                                    <li>분야</li>
+                                    <li>출판사</li>
+                                </ul>
+                                <ul class="k_class">
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                </ul>
+                                <ul>
+                                    <li>실내식물의 문화사</li>
+                                    <li>마이크 몬더</li>
+                                    <li>역사</li>
+                                    <li>고유서가</li>
+                                </ul>
+                                <a href="#" class="btn1">더보기 +</a>
+                            </div>
+                        </a>
+                    </li>
+                 </ul>
+             </li>
+             <li id="ppr2">
+                <ul class="one animated fadeInLeft">
+                    <li class="box-hover wp12 delay-05s">
+                    <a href="#">
+                        <img src="img/book_9.png" alt="제품1">
+                            <div class="t_book_box1">
+                                <ul>
+                                    <li>제목</li>
+                                    <li>저자</li>
+                                    <li>분야</li>
+                                    <li>출판사</li>
+                                </ul>
+                                <ul class="k_class">
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                </ul>
+                                <ul>
+                                    <li>못 먹는 남자</li>
+                                    <li>정해연</li>
+                                    <li>한국문화</li>
+                                    <li>엘릭시르</li>
+                                </ul>
+                                <a href="#" class="btn1">더보기 +</a>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box-hover wp13 delay-1s">
+                    <a href="#">
+                        <img src="img/book_10.png" alt="제품1">
+                            <div class="t_book_box1">
+                                <ul>
+                                    <li>제목</li>
+                                    <li>저자</li>
+                                    <li>분야</li>
+                                    <li>출판사</li>
+                                </ul>
+                                <ul class="k_class">
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                </ul>
+                                <ul>
+                                    <li>나 같은 기계들</li>
+                                    <li>이언 매큐언</li>
+                                    <li>세계문학</li>
+                                    <li>문학동네</li>
+                                </ul>
+                                <a href="#" class="btn1">더보기 +</a>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box-hover wp14 delay-15s">
+                    <a href="#">
+                        <img src="img/book_11.png" alt="제품1">
+                            <div class="t_book_box1">
+                                <ul>
+                                    <li>제목</li>
+                                    <li>저자</li>
+                                    <li>분야</li>
+                                    <li>출판사</li>
+                                </ul>
+                                <ul class="k_class">
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                </ul>
+                                <ul>
+                                    <li>루쉰 정선</li>
+                                    <li>첸리췬</li>
+                                    <li>인문</li>
+                                    <li>글항아리</li>
+                                </ul>
+                                <a href="#" class="btn1">더보기 +</a>
+                            </div>
+                        </a>
+                    </li>
+                 </ul>
+             </li>
+             <li id="ppr3">
+                <ul class="one animated fadeInLeft">
+                    <li class="box-hover wp12 delay-05s">
+                    <a href="#">
+                        <img src="img/book_12.png" alt="제품1">
+                            <div class="t_book_box1">
+                                <ul>
+                                    <li>제목</li>
+                                    <li>저자</li>
+                                    <li>수상내역</li>
+                                    <li>출판사</li>
+                                </ul>
+                                <ul class="k_class">
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                </ul>
+                                <ul>
+                                    <li>당신들의 나라</li>
+                                    <li>이유</li>
+                                    <li>문학동네 소설상</li>
+                                    <li>문학동네</li>
+                                </ul>
+                                <a href="#" class="btn1">더보기 +</a>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box-hover wp13 delay-1s">
+                    <a href="#">
+                        <img src="img/book_13.png" alt="제품1">
+                            <div class="t_book_box1">
+                                <ul>
+                                    <li>제목</li>
+                                    <li>저자</li>
+                                    <li>수상내역</li>
+                                    <li>출판사</li>
+                                </ul>
+                                <ul class="k_class">
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                </ul>
+                                <ul>
+                                    <li>최단경로</li>
+                                    <li>강희영</li>
+                                    <li>문학동네 소설상</li>
+                                    <li>문학동네</li>
+                                </ul>
+                                <a href="#" class="btn1">더보기 +</a>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box-hover wp14 delay-15s">
+                    <a href="#">
+                        <img src="img/book_14.png" alt="제품1">
+                            <div class="t_book_box1">
+                                <ul>
+                                    <li>제목</li>
+                                    <li>저자</li>
+                                    <li>수상내역</li>
+                                    <li>출판사</li>
+                                </ul>
+                                <ul class="k_class">
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                    <li>:</li>
+                                </ul>
+                                <ul>
+                                    <li>인사이트 밀</li>
+                                    <li>요네자와 호노부</li>
+                                    <li>노벨문학상</li>
+                                    <li>엘릭시르</li>
+                                </ul>
+                                <a href="#" class="btn1">더보기 +</a>
+                            </div>
+                        </a>
+                    </li>
+                 </ul>
+             </li>
+         </ul> <!--ppane end-->
+     </div> <!--ppr end-->
+</section>
+
+<section>
+    <div class="back_img">
+        <div class="back_text">
+            <h1 class="wp7">북클럽 문학동네</h1>
+            <ul class="wp8 delay-05s">
+                <li>국내 최재 단행본 출판그룹 문학동네 유료 멤버십 서비스</li>
+                <li>가입은 한번, 혜택은 일 년 내내!</li>
+                <li>내 일상이 즐거워지는 프리미엄 북 라이프</li>
+                <!-- <i class="fa-solid fa-book-open fa-flip"></i>     -->
+                <!-- <i class="fa-solid fa-book-bookmark fa-beat"></i> -->
+                <li class="btn_1"><a href="#">자세히 보기 Click</a></li>
+            </ul>
+            <ul>
+                <li><i class="fa-solid fa-book fa-beat-fade"></i></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="author">
+        <div class="author_box">
+            <h1 class="wp9">AUTHOR</h1>
+            <p class="wp10 delay-05s">AUTHOR</p>
+            <ul class="author_text wp11 delay-1s">
+                <li>저자정보를 쉽게 검색하세요</li>
+                <li><img src="img/swatch_1.png" alt="swatch"></li>
+                <a href="#" class="btn_2">바로가기</a>
+            </ul>
+              <!-- <a href="#" class="btn_2">바로가기</a> -->
+        </div>
+    </div>
+</section>
+
+<!-- top button 부분 -->
+<div id="top">
+    <i class="fa regular fa-arrow-up"></i>
+</div>
+
+<!-- <button id="top"></button> -->
+
+
+
+<footer>
+    <div class="footer_box">
+        <ul class="f_text">
+            <li><a href="#">개인정보처리방침</a></li>
+            <li><a href="#">이용약관</a></li>
+            <li><a href="#">제휴문의</a></li>
+            <li><a href="#">채용안내</a></li>
+            <li><a href="#">찾아오시는길</a></li>
+            <li><a href="#">전화번호 안내</a></li>
+        </ul>
+        <ul class="sns">
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-mug-saucer"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+        </ul>
+    </div>
+
+    <div class="footer_box2">
+        <ul>
+            <li>(주)문학동네 | 10881 경기도 파주시 회동길 210 | 사업자번호 208-81-24906 | 대표자 : 김소영 | 이메일 : editor@munhak.com</li>
+            <li>고객센터 전화번호 : 031-955-8888 | 통신판매번호 : 2005-00436 | 대표 이메일 : web@munhak.com</li>
+            <li>COPYRIGHT 2019 (주) MUNHAKDONGNE Publishing Corp.</li>
+        </ul>
+    </div>
+</footer>
+
+</body>
+</html>
+
+
+
